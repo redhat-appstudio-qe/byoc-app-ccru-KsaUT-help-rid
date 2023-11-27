@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: zzua
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: zzua
+    app.kubernetes.io/part-of: byoc-app-ccru
+  name: zzua
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: java-quarkus-app
+      app.kubernetes.io/instance: zzua
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: java-quarkus-app
+        app.kubernetes.io/instance: zzua
+    spec:
+      containers:
+      - image: java-quarkus-image:latest
+        name: my-java-quarkus
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 10m
+            memory: 100Mi
+status: {}
